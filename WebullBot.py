@@ -40,9 +40,8 @@ if not loginInfo:
     wb.get_mfa('myemail@email.com') #mobile number should be okay as well.
     code = input('Enter MFA Code : ')
     loginInfo = wb.login('myemail@email.com', 'my password', 'My Device', code)
-    f = open("token.txt", "w")
-    f.write(json.dumps(loginInfo))
-    f.close()
+    with open("token.txt", "w") as f:
+        f.write(json.dumps(loginInfo))
 else:
     wb.refresh_login()
     loginInfo = wb.login('myemail@email.com', 'my password')
@@ -94,11 +93,11 @@ def run(sc):
             #call this method again every minute for new price changes
             drawChart(hist, True)
     except Exception as e:
-        print(str(e))
+        print(e)
     s.enter(60, 1, run, (sc,))
     plt.pause(60)
 conn = StreamConn(debug_flg=False)
-if not loginInfo['accessToken'] is None and len(loginInfo['accessToken']) > 1:
+if loginInfo['accessToken'] is not None and len(loginInfo['accessToken']) > 1:
     conn.connect(loginInfo['uuid'], access_token=loginInfo['accessToken'])
 else:
     conn.connect(wb.did)
