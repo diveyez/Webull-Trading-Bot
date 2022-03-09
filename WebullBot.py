@@ -1,7 +1,8 @@
 #WeBull Trading Bot, by Jacob Amaral
 #Youtube : Jacob Amaral
 #This bot will connect to the unofficial Webull API and place trades automatically using Support / Resistance on 1 minute candles
-from webull import paper_webull, endpoints # for real money trading, just import 'webull' instead
+#from webull import paper_webull, endpoints # for real money trading, just import 'webull' instead
+from webull
 from webull.streamconn import StreamConn
 import paho.mqtt.client as mqtt
 import json
